@@ -1,13 +1,10 @@
-    .equ STACK_TOP, 0x20001000
     .text
     .syntax unified
     .cpu cortex-m4
     .thumb
 
-_start:
-    .word STACK_TOP
-    .word _reset
 
+.globl _reset
 .thumb_func
 _reset:
     /* Copy Data values from ROM -> RAM */

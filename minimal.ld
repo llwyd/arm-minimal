@@ -8,6 +8,7 @@ SECTIONS
     . = ORIGIN(ROM);
     .text :
     {
+        KEEP(*(.isr_vectors))
         *(.text*)
         *(.rodata*)
         _etext = .;

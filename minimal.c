@@ -8,12 +8,17 @@ static volatile unsigned int * pin      = (unsigned int *)0x48000414;
 
 static volatile const unsigned int pin_num = 0x8;
 
+volatile void _test(void)
+{
+
+}
+
 int main ( void )
 {
 
     /* enable port b*/
     *rcc |=  0x2;
-
+    _test();
     /* set gpio b to output */
     *gpio_b &= 0xFFFFFF3F;
     *gpio_b |= 0x40;
