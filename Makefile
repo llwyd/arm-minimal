@@ -17,3 +17,5 @@ gdb:
 	arm-none-eabi-gdb -ex "target remote localhost:3333" minimal.elf
 ezflash:
 	st-flash write minimal.bin 0x08000000
+dump:
+	hexdump -C minimal.bin
