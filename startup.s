@@ -22,6 +22,8 @@ copydata:
      */
     cmp r1, r2
     bne copydata
+
+    CPSIE I
     bl main
 
 dead:

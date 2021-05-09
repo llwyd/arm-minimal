@@ -8,7 +8,7 @@ startup.o: startup.s
 vectors.o: vectors.s
 	arm-none-eabi-as -g -mcpu=cortex-m4 -mthumb  vectors.s -o vectors.o
 minimal.o: minimal.c
-	arm-none-eabi-gcc -Werror -Wall  -g -nostdlib -nostartfiles -mcpu=cortex-m4 -mthumb -c minimal.c -o minimal.o
+	arm-none-eabi-gcc  -Wall  -g -nostdlib -nostartfiles -mcpu=cortex-m4 -mthumb -c minimal.c -o minimal.o
 clean:
 	rm startup.o minimal.elf minimal.bin minimal.o minimal.map vectors.o
 debug:
