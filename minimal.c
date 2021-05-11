@@ -15,10 +15,13 @@ static volatile unsigned int * stk_calib    = (unsigned int *)0xE000E01C;
 
 static const unsigned int pin_num = 0x8;
 
+static unsigned int counter = 0U;
+
 __attribute__((section(".data")))
 void _sysTick( void )
 {
     *pin ^= pin_num;
+    counter++;
 }
 
 int main ( void )

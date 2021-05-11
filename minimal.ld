@@ -22,8 +22,11 @@ SECTIONS
         _edata = .;
     } > RAM AT > ROM
     
+    . = ALIGN(4);
     .bss :
-    {
+    { 
+        _sbss = .;
         *(.bss*)
+        _ebss = .;
     } > RAM AT > ROM     
 }
