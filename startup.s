@@ -23,7 +23,7 @@ copydata:
     cmp r1, r2
     bne copydata
 
-    CPSIE I
+    CPSID IF
     bl main
 
 dead:

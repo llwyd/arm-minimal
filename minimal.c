@@ -39,6 +39,8 @@ int main ( void )
     /* turn on interrupt */
     *stk_ctrl |= 0x7;
 
+    asm("CPSIE IF");
+
     while(1);
 
     return 0;
