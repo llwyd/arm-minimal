@@ -7,21 +7,17 @@
 .globl _reset
 .thumb_func
 _reset:
-    /* Copy Data values from ROM -> RAM */
+    /* Copy Data values from ROM -> SRAM2 */
     ldr r0, = _etext 
+
+    ldr r1, = _sfastdata
+    ldr r2, = _efastdata
+    bl copytoram
+
+    /* Copy Data values from ROM -> SRAM */
     ldr r1, = _sdata
     ldr r2, = _edata
-copydata:
-    /* load from ROM and post increment */
-    ldr r3, [r0], #4
-    /* Store in RAM and post increment */
-    str r3, [r1], #4
-
-    /* Compare current data pointer to end
-     * and if equal, then branch to main
-     */
-    cmp r1, r2
-    bne copydata
+    bl copytoram
 
     /* Clear BSS Region */
 clearbss:
@@ -33,8 +29,31 @@ clearbss:
     cmp r1, r2
     bne clearbss
 
+    /* Disable interrupts */
     CPSID IF
     bl main
+
+/*  Function for copying from rom to ram:
+*   r0 = current source location
+*   r1 = start of target location
+*   r2 = end of target location
+*/
+copytoram:
+    push {r4-r11, lr}
+copy:
+    /* load from ROM and post increment */
+    ldr r3, [r0], #4
+    /* Store in RAM and post increment */
+    str r3, [r1], #4
+
+    /* Compare current data pointer to end
+     * and if equal, then branch to main
+     */
+    cmp r1, r2
+    bne copy
+
+    /* Return */
+    pop {r4-r11, pc}
 
 dead:
 	b dead

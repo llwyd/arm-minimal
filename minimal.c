@@ -17,7 +17,7 @@ static const unsigned int pin_num = 0x8;
 
 static unsigned int counter = 0U;
 
-__attribute__((section(".data")))
+__attribute__((section(".fastdata")))
 void _sysTick( void )
 {
     *pin ^= pin_num;
