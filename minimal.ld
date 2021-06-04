@@ -4,6 +4,8 @@ MEMORY {
     RAM2 (rwx) : ORIGIN = 0x10000000, LENGTH = 16K
 }
 
+STACK_SIZE = 0x1000;
+
 SECTIONS
 {
     . = ORIGIN(ROM);
@@ -37,5 +39,13 @@ SECTIONS
         _sbss = .;
         *(.bss*)
         _ebss = .;
-    } > RAM AT > ROM     
+    } > RAM AT > ROM  
+
+    . = ALIGN(4);
+    .stack :
+    {
+        . += STACK_SIZE;
+        . = ALIGN(4);
+        _estack = .;
+    } > RAM
 }

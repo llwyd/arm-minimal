@@ -1,10 +1,9 @@
-    .equ STACK_TOP, 0x20001000
     .syntax unified
     .cpu cortex-m4
     .thumb
 
 .section .isr_vectors
-    .word STACK_TOP     /* 0x00 Top of Stack */
+    .word _estack       /* 0x00 Top of Stack */
     .word _reset        /* 0x04 Reset */
     .word _nmi          /* 0x08 NMI */
     .word _hardFault    /* 0x0C Hard Fault */
