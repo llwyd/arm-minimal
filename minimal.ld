@@ -38,6 +38,7 @@ SECTIONS
     { 
         _sbss = .;
         *(.bss*)
+        *(COMMON)
         _ebss = .;
     } > RAM AT > ROM  
 

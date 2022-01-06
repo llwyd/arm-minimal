@@ -8,11 +8,13 @@ startup.o: startup.s
 vectors.o: vectors.s
 	arm-none-eabi-as -g -mcpu=cortex-m4 -mthumb  vectors.s -o vectors.o
 minimal.o: minimal.c
-	arm-none-eabi-gcc  -Wall  -g -nostdlib -nostartfiles -mcpu=cortex-m4 -mthumb -c minimal.c -o minimal.o
+	arm-none-eabi-gcc -O3  -Wall  -g -nostdlib -nostartfiles -mcpu=cortex-m4 -mthumb -c minimal.c -o minimal.o
 clean:
 	rm startup.o minimal.elf minimal.bin minimal.o minimal.map vectors.o
 debug:
 	openocd -f /usr/share/openocd/scripts/interface/stlink-v2-1.cfg -f /usr/share/openocd/scripts/target/stm32l4x.cfg
+flash:
+	openocd -f /usr/share/openocd/scripts/interface/stlink-v2-1.cfg -f /usr/share/openocd/scripts/target/stm32l4x.cfg -c "program minimal.bin exit 0x08000000 verify reset"
 gdb:
 	arm-none-eabi-gdb -ex "target remote localhost:3333" minimal.elf
 ezflash:

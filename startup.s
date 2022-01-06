@@ -17,8 +17,11 @@ _reset:
     /* Copy Data values from ROM -> SRAM */
     ldr r1, = _sdata
     ldr r2, = _edata
+    cmp r1, r2
+    beq copiedtoram
     bl copytoram
 
+copiedtoram:
     /* Clear BSS Region */
     ldr r1, = _sbss
 clearbss:
